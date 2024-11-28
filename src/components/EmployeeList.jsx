@@ -118,41 +118,41 @@ const EmployeeList = () => {
                     </div>
 
                     <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200">
+                        <table className="min-w-full divide-y divide-gray-200 table-fixed">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                                    <th className="w-20 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                                         onClick={() => handleSort('id')}>
                                         ID {sort.field === 'id' && (sort.order === 'asc' ? '↑' : '↓')}
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Image
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                                    <th className="w-40 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                                         onClick={() => handleSort('name')}>
                                         Name {sort.field === 'name' && (sort.order === 'asc' ? '↑' : '↓')}
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                                    <th className="w-48 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                                         onClick={() => handleSort('email')}>
                                         Email {sort.field === 'email' && (sort.order === 'asc' ? '↑' : '↓')}
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="w-32 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Mobile
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="w-32 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Designation
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Gender
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="w-40 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Course
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                                    <th className="w-32 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                                         onClick={() => handleSort('createDate')}>
                                         Create Date {sort.field === 'createDate' && (sort.order === 'asc' ? '↑' : '↓')}
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th className="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Actions
                                     </th>
                                 </tr>
@@ -160,21 +160,23 @@ const EmployeeList = () => {
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {employees.map((employee) => (
                                     <tr key={employee._id}>
-                                        <td className="px-6 py-4 whitespace-nowrap">{employee.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <img
-                                                src={`${API_URL}${employee.image}`}
-                                                alt={employee.name}
-                                                className="h-10 w-10 rounded-full"
-                                            />
+                                        <td className="px-6 py-4 text-sm text-gray-900">{employee.id}</td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex-shrink-0 h-12 w-12">
+                                                <img
+                                                    src={`${API_URL}${employee.image}`}
+                                                    alt={employee.name}
+                                                    className="h-12 w-12 rounded-full object-cover"
+                                                />
+                                            </div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{employee.name}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{employee.email}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{employee.mobile}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{employee.designation}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{employee.gender}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">{employee.course.join(', ')}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-6 py-4 text-sm text-gray-900 truncate">{employee.name}</td>
+                                        <td className="px-6 py-4 whitespace-normal text-sm break-words">{employee.email}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm">{employee.mobile}</td>
+                                        <td className="px-6 py-4 whitespace-normal text-sm">{employee.designation}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm">{employee.gender}</td>
+                                        <td className="px-6 py-4 whitespace-normal text-sm">{employee.course.join(', ')}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm">
                                             {new Date(employee.createDate).toLocaleDateString()}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
