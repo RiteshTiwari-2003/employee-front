@@ -162,12 +162,29 @@ const EmployeeList = () => {
                                     <tr key={employee._id}>
                                         <td className="px-6 py-4 text-sm text-gray-900">{employee.id}</td>
                                         <td className="px-6 py-4">
-                                            <div className="flex-shrink-0 h-12 w-12">
-                                                <img
-                                                    src={`${API_URL}${employee.image}`}
-                                                    alt={employee.name}
-                                                    className="h-12 w-12 rounded-full object-cover"
-                                                />
+                                            <div className="flex-shrink-0 h-16 w-16">
+                                                {employee.image ? (
+                                                    <img
+                                                        src={employee.image.startsWith('data:') 
+                                                            ? employee.image 
+                                                            : `${API_URL}/uploads/${employee.image}`}
+                                                        alt={employee.name}
+                                                        className="h-16 w-16 rounded-lg object-cover border border-gray-200 shadow-sm"
+                                                        onError={(e) => {
+                                                            e.target.onerror = null;
+                                                            e.target.src = 'https://via.placeholder.com/64?text=No+Image';
+                                                        }}
+                                                        style={{
+                                                            maxWidth: '100%',
+                                                            maxHeight: '100%',
+                                                            objectFit: 'cover'
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <div className="h-16 w-16 rounded-lg bg-gray-100 flex items-center justify-center border border-gray-200">
+                                                        <span className="text-gray-400 text-sm">No Image</span>
+                                                    </div>
+                                                )}
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 text-sm text-gray-900 truncate">{employee.name}</td>
